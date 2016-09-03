@@ -5,16 +5,16 @@
  */
 (function(global) {
 
-  var ngVer = '@2.0.0-rc.5'; // lock in the angular package version; do not let it float to current!
+  var ngVer = '@2.0.0-rc.6'; // lock in the angular package version; do not let it float to current!
 
   //map tells the System loader where to look for things
   var map = {
     'app':                        'app',
 
     '@angular':                   'https://unpkg.com/@angular', // sufficient if we didn't pin the version
-    'rxjs':                       'https://unpkg.com/rxjs@5.0.0-beta.6',
+    'rxjs':                       'https://unpkg.com/rxjs@5.0.0-beta.11',
     'ts':                         'https://unpkg.com/plugin-typescript@4.0.10/lib/plugin.js',
-    'typescript':                 'https://unpkg.com/typescript@1.9.0-dev.20160409/lib/typescript.js',
+    'typescript':                 'https://unpkg.com/typescript@2.0.2/lib/typescript.js',
  };
 
   //packages tells the System loader how to load when no filename and/or no extension
