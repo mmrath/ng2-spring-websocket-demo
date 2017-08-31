@@ -1,74 +1,48 @@
-/**
- * PLUNKER VERSION (based on systemjs.config.js in angular.io)
- * System configuration for Angular 2 samples
- * Adjust as necessary for your application needs.
- */
-(function(global) {
+var angularVersion;
+if(window.AngularVersionForThisPlunker === 'latest'){
+    angularVersion = ''; //picks up latest
+}
+else {
+    angularVersion = '@' + window.AngularVersionForThisPlunker;
+}
 
-  var ngVer = '@2.0.0'; // lock in the angular package version; do not let it float to current!
-
-  //map tells the System loader where to look for things
-  var map = {
-    'app':                        'app',
-
-    '@angular':                   'https://unpkg.com/@angular', // sufficient if we didn't pin the version
-    'rxjs':                       'https://unpkg.com/rxjs@5.0.0-beta.12',
-    'ts':                         'https://unpkg.com/plugin-typescript@4.0.10/lib/plugin.js',
-    'typescript':                 'https://unpkg.com/typescript@2.0.2/lib/typescript.js',
- };
-
-  //packages tells the System loader how to load when no filename and/or no extension
-  var packages = {
-    'app':                        { main: 'main.ts',  defaultExtension: 'ts' },
-    'rxjs':                       { defaultExtension: 'js' }
-  };
-
-  var ngPackageNames = [
-    'common',
-    'compiler',
-    'core',
-    'platform-browser',
-    'platform-browser-dynamic'
-  ];
-
-  // Add map entries for each angular package
-  // only because we're pinning the version with `ngVer`.
-  ngPackageNames.forEach(function(pkgName) {
-    map['@angular/'+pkgName] = 'https://unpkg.com/@angular/' + pkgName + ngVer;
-  });
-
-  // Add package entries for angular packages
-  ngPackageNames.forEach(function(pkgName) {
-
-    // Bundled (~40 requests):
-    packages['@angular/'+pkgName] = { main: '/bundles/' + pkgName + '.umd.js' };
-
-    // Individual files (~300 requests):
-    //packages['@angular/'+pkgName] = { main: 'index.js', defaultExtension: 'js' };
-  });
-
-  var config = {
-    // DEMO ONLY! REAL CODE SHOULD NOT TRANSPILE IN THE BROWSER
-    transpiler: 'ts',
+System.config({
+    //use typescript for compilation
+    transpiler: 'typescript',
+    //typescript compiler options
     typescriptOptions: {
-      tsconfig: true
+        emitDecoratorMetadata: true
     },
-    meta: {
-      'typescript': {
-        "exports": "ts"
-      }
+    paths: {
+        'npm:': 'https://unpkg.com/'
     },
-    map: map,
-    packages: packages
-  };
+    //map tells the System loader where to look for things
+    map: {
+        'app': './app',
+        '@angular/core': 'npm:@angular/core'+ angularVersion + '/bundles/core.umd.js',
+        '@angular/common': 'npm:@angular/common' + angularVersion + '/bundles/common.umd.js',
+        '@angular/compiler': 'npm:@angular/compiler' + angularVersion  + '/bundles/compiler.umd.js',
+        '@angular/platform-browser': 'npm:@angular/platform-browser' + angularVersion + '/bundles/platform-browser.umd.js',
+        '@angular/platform-browser-dynamic': 'npm:@angular/platform-browser-dynamic' + angularVersion + '/bundles/platform-browser-dynamic.umd.js',
+        '@angular/http': 'npm:@angular/http' + angularVersion + '/bundles/http.umd.js',
+        '@angular/router': 'npm:@angular/router' + angularVersion +'/bundles/router.umd.js',
+        '@angular/forms': 'npm:@angular/forms' + angularVersion + '/bundles/forms.umd.js',
+        '@angular/animations': 'npm:@angular/animations' + angularVersion + '/bundles/animations.umd.js',
+        '@angular/platform-browser/animations': 'npm:@angular/platform-browser' + angularVersion + '/bundles/platform-browser-animations.umd.js',
+        '@angular/animations/browser': 'npm:@angular/animations' + angularVersion + '/bundles/animations-browser.umd.js',
 
-  System.config(config);
-
-})(this);
-
-
-/*
-Copyright 2016 Google Inc. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license
-*/
+        'tslib': 'npm:tslib@1.6.1',
+        'rxjs': 'npm:rxjs',
+        'typescript': 'npm:typescript@2.2.1/lib/typescript.js'
+    },
+    //packages defines our app package
+    packages: {
+        app: {
+            main: './main.ts',
+            defaultExtension: 'ts'
+        },
+        rxjs: {
+            defaultExtension: 'js'
+        }
+    }
+});

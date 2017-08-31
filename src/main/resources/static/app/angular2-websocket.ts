@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs/Observable";
-import {isPresent, isString, isArray,isFunction} from '@angular/compiler/src/facade/lang';
 import {Scheduler} from "rxjs/Rx";
 import {Subject} from "rxjs/Subject";
+
+
 
 
 @Injectable()
